@@ -1,4 +1,3 @@
-import FloatingCTA from './components/FloatingCTA'
 import CustomCursor from './components/CustomCursor'
 import Hero from './components/Hero'
 import Stats from './components/Stats'
@@ -35,7 +34,6 @@ export default function App() {
         </main>
         <Footer />
       </div>
-      <FloatingCTA />
       <style>{`
         .bg-gradient {
           position: fixed;
