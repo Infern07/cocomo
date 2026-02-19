@@ -1,8 +1,18 @@
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import CompanyCards3D from './CompanyCards3D'
 import logoImg from '../assets/Logo.png'
 
+const navLinks = [
+  { href: '#stats', label: 'ABOUT' },
+  { href: '#features', label: 'SERVICES' },
+  { href: '#integrations', label: 'INTEGRATIONS' },
+  { href: '#faqs', label: 'FAQS' },
+]
+
 export default function Hero() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
     <section className="hero section">
       <nav className="nav nav-fixed">
@@ -13,14 +23,43 @@ export default function Hero() {
             <span className="logo-sub">Media</span>
           </span>
         </motion.a>
-        <motion.div className="nav-links" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
-          <a href="#stats">ABOUT</a>
-          <a href="#features">SERVICES</a>
-          <a href="#integrations">INTEGRATIONS</a>
-          <a href="#faqs">FAQS</a>
+
+        <div className="nav-links nav-links-desktop">
+          {navLinks.map((l) => (
+            <a key={l.href} href={l.href}>{l.label}</a>
+          ))}
           <a href="#cta" className="btn-nav-cta">Book a demo</a>
-        </motion.div>
+        </div>
+
+        <button
+          type="button"
+          className="nav-hamburger"
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <span className={`hamburger-line ${menuOpen ? 'open' : ''}`} />
+          <span className={`hamburger-line ${menuOpen ? 'open' : ''}`} />
+          <span className={`hamburger-line ${menuOpen ? 'open' : ''}`} />
+        </button>
       </nav>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="nav-mobile-menu"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.25 }}
+          >
+            {navLinks.map((l) => (
+              <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)}>{l.label}</a>
+            ))}
+            <a href="#cta" className="btn-nav-cta-mobile" onClick={() => setMenuOpen(false)}>Book a demo</a>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div className="hero-content">
         <motion.h1
@@ -129,7 +168,7 @@ export default function Hero() {
           letter-spacing: 0.2em;
           vertical-align: baseline;
         }
-        .nav-links { display: flex; align-items: center; gap: 2rem; }
+        .nav-links-desktop { display: flex; align-items: center; gap: 2rem; }
         .nav-links a {
           font-family: var(--font-heading);
           font-size: 0.7rem;
@@ -152,6 +191,70 @@ export default function Hero() {
           box-shadow: 0 0 20px var(--accent-glow);
         }
 
+        .nav-hamburger {
+          display: none;
+          flex-direction: column;
+          justify-content: center;
+          gap: 6px;
+          width: 44px;
+          height: 44px;
+          padding: 10px;
+          background: transparent;
+          border: 1px solid var(--border-subtle);
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+        .nav-hamburger:hover { border-color: var(--accent); }
+        .hamburger-line {
+          display: block;
+          width: 100%;
+          height: 2px;
+          background: white;
+          border-radius: 1px;
+          transition: transform 0.3s, opacity 0.3s;
+        }
+        .hamburger-line:nth-child(1).open { transform: translateY(8px) rotate(45deg); }
+        .hamburger-line:nth-child(2).open { opacity: 0; }
+        .hamburger-line:nth-child(3).open { transform: translateY(-8px) rotate(-45deg); }
+
+        .nav-mobile-menu {
+          position: fixed;
+          top: 73px;
+          left: 0;
+          right: 0;
+          z-index: 99;
+          background: rgba(0, 0, 0, 0.98);
+          backdrop-filter: blur(20px);
+          border-bottom: 1px solid var(--border-subtle);
+          display: flex;
+          flex-direction: column;
+          padding: 1.5rem 2rem;
+          gap: 0.5rem;
+          overflow: hidden;
+        }
+        .nav-mobile-menu a {
+          font-family: var(--font-heading);
+          font-size: 1rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          color: var(--silver);
+          text-decoration: none;
+          padding: 1rem 0;
+          border-bottom: 1px solid var(--border-subtle);
+          transition: color 0.2s;
+        }
+        .nav-mobile-menu a:hover { color: white; }
+        .btn-nav-cta-mobile {
+          margin-top: 0.5rem;
+          padding: 1rem !important;
+          background: var(--accent);
+          color: white !important;
+          border-radius: 8px;
+          border: none !important;
+          text-align: center;
+        }
+
         .hero-content {
           flex: 1;
           display: flex;
@@ -165,11 +268,16 @@ export default function Hero() {
 
         .hero-title {
           font-size: clamp(2.5rem, 6vw, 4.5rem);
-          font-weight: 700;
-          letter-spacing: -0.03em;
+          font-weight: 600;
+          letter-spacing: 0.01em;
           line-height: 1.1;
           margin-bottom: 1.5rem;
           color: white;
+          animation: hero-title-float 6s ease-in-out infinite;
+        }
+        @keyframes hero-title-float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-4px); }
         }
 
         .hero-tagline {
@@ -187,6 +295,10 @@ export default function Hero() {
           flex-wrap: wrap;
           justify-content: center;
           margin-bottom: 3rem;
+        }
+        @media (max-width: 480px) {
+          .hero-buttons { flex-direction: column; width: 100%; max-width: 280px; margin-left: auto; margin-right: auto; }
+          .btn-primary, .btn-secondary { width: 100%; text-align: center; padding: 1rem 1.5rem; min-height: 48px; }
         }
         .btn-primary, .btn-secondary {
           font-family: var(--font-heading);
@@ -237,8 +349,16 @@ export default function Hero() {
 
         .companies { width: 100%; max-width: 100%; margin-top: 2rem; }
         @media (max-width: 768px) {
-          .nav-links { display: none; }
+          .nav-links-desktop { display: none; }
+          .nav-hamburger { display: flex; }
           .hero-title { font-size: 2rem; }
+          .hero-tagline { font-size: 1rem; }
+        }
+        @media (max-width: 480px) {
+          .hero { padding: 5.5rem 1.25rem 3rem; }
+          .hero-title { font-size: 1.75rem; }
+          .nav-fixed { padding: 1rem 1.25rem; }
+          .nav-mobile-menu { top: 65px; padding: 1.25rem 1.5rem; }
         }
       `}</style>
     </section>

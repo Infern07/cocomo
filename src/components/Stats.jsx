@@ -63,16 +63,24 @@ export default function Stats() {
           .stats-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 500px) {
-          .stats-grid { grid-template-columns: 1fr; }
+          .stats-grid { grid-template-columns: 1fr; gap: 1rem; }
+          .stats-title { font-size: 1.5rem; margin-bottom: 2rem; }
         }
         .stat-card {
           position: relative;
           padding: 2rem 1.5rem;
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid var(--border-subtle);
-          border-radius: 12px;
+          border-radius: 16px;
           transition: all 0.3s;
           overflow: hidden;
+        }
+        @media (max-width: 768px) {
+          .stat-card {
+            padding: 1.75rem 1.25rem;
+            border-radius: 14px;
+            min-height: 140px;
+          }
         }
         .stat-value-animated {
           animation: stat-pulse 3s ease-in-out infinite;

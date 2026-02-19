@@ -49,7 +49,10 @@ export default function FloatingCTA() {
           50% { opacity: 0.5; transform: scale(1.2); }
         }
         @media (max-width: 768px) {
-          .floating-cta { bottom: 1.5rem; right: 1.5rem; width: 48px; height: 48px; }
+          .floating-cta { bottom: 1.25rem; right: 1.25rem; width: 52px; height: 52px; }
+        }
+        @media (max-width: 480px) {
+          .floating-cta { bottom: 1rem; right: 1rem; width: 48px; height: 48px; }
         }
       `}</style>
     </motion.a>

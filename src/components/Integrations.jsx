@@ -146,6 +146,14 @@ export default function Integrations() {
           padding: 2rem 1.75rem;
           text-align: left;
           overflow: hidden;
+          border-radius: 16px;
+        }
+        @media (max-width: 768px) {
+          .integrations-grid { gap: 1rem; }
+          .integration-card {
+            padding: 1.5rem 1.25rem;
+            border-radius: 14px;
+          }
         }
         .integration-card-glow {
           position: absolute;

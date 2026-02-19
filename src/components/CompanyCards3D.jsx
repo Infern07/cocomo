@@ -2,19 +2,21 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 
 const companies = [
-  { name: 'Amazon', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg' },
-  { name: 'Google', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg' },
-  { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg' },
+  { name: 'Belgium Waffle', initials: 'BW' },
+  { name: 'Petpooja', initials: 'PP' },
+  { name: 'Samsung', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg' },
   { name: 'Meta', logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg' },
-  { name: 'Nike', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg' },
-  { name: 'Spotify', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg' },
-  { name: 'Netflix', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg' },
+  { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg' },
   { name: 'Adobe', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/8d/Adobe_Corporate_Logo.png' },
+  { name: 'Google', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg' },
+  { name: 'Trends', initials: 'TR' },
+  { name: 'Mamaearth', initials: 'ME' },
+  { name: 'Intas', initials: 'IN' },
+  { name: 'Amity University', initials: 'AU' },
 ]
 
 const CARD_WIDTH = 200
 const GAP = 20
-const TRACK_WIDTH = companies.length * CARD_WIDTH + (companies.length - 1) * GAP
 
 export default function CompanyCards3D() {
   const ref = useRef(null)
@@ -31,11 +33,7 @@ export default function CompanyCards3D() {
     >
       <p className="brand-label">ALREADY CHOSEN BY THESE MARKET LEADERS</p>
       <div className="brand-track-wrapper">
-        <motion.div
-          className="brand-track"
-          animate={{ x: [0, -TRACK_WIDTH] }}
-          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-        >
+        <div className="brand-track">
           {[...companies, ...companies].map((c, i) => (
             <motion.div
               key={`${c.name}-${i}`}
@@ -47,11 +45,22 @@ export default function CompanyCards3D() {
               }}
               transition={{ type: 'spring', stiffness: 400, damping: 25 }}
             >
-              <img src={c.logo} alt={c.name} className="brand-logo" referrerPolicy="no-referrer" onError={(e) => { e.target.style.display = 'none'; e.target.nextElementSibling?.classList.add('show') }} />
-              <span className="brand-name brand-name-fallback">{c.name}</span>
+              {c.logo ? (
+                <>
+                  <img src={c.logo} alt={c.name} className="brand-logo" referrerPolicy="no-referrer" onError={(e) => { e.target.style.display = 'none'; e.target.nextElementSibling?.classList.add('show') }} />
+                  <span className="brand-name brand-name-fallback">{c.name}</span>
+                </>
+              ) : c.initials ? (
+                <>
+                  <span className="brand-initials">{c.initials}</span>
+                  <span className="brand-name">{c.name}</span>
+                </>
+              ) : (
+                <span className="brand-name brand-name-fallback show">{c.name}</span>
+              )}
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </motion.div>
       <style>{`
@@ -81,6 +90,11 @@ export default function CompanyCards3D() {
           gap: ${GAP}px;
           width: max-content;
           padding: 0.5rem 0;
+          animation: brand-marquee 30s linear infinite;
+        }
+        @keyframes brand-marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
         }
         .brand-card {
           flex-shrink: 0;
@@ -106,6 +120,22 @@ export default function CompanyCards3D() {
           opacity: 0.95;
           filter: brightness(0) invert(1);
         }
+        .brand-initials {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--font-heading);
+          font-size: 1rem;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          color: white;
+          width: 44px;
+          height: 44px;
+          flex-shrink: 0;
+          background: linear-gradient(135deg, rgba(29, 185, 84, 0.35), rgba(29, 185, 84, 0.15));
+          border: 1px solid rgba(29, 185, 84, 0.45);
+          border-radius: 10px;
+        }
         .brand-name-fallback {
           display: none;
           font-family: var(--font-heading);
@@ -124,10 +154,21 @@ export default function CompanyCards3D() {
           letter-spacing: 0.08em;
           color: var(--text-secondary);
         }
+        .brand-card:has(.brand-initials) .brand-name {
+          color: white;
+        }
         @media (max-width: 768px) {
-          .brand-section { padding: 0 1rem; }
+          .brand-section { padding: 0 1rem; margin-top: 2rem; }
           .brand-card { width: 160px; min-width: 160px; height: 70px; }
           .brand-logo { height: 28px; }
+          .brand-initials { width: 38px; height: 38px; font-size: 0.85rem; }
+          .brand-name-fallback { font-size: 0.85rem; }
+        }
+        @media (max-width: 480px) {
+          .brand-section { padding: 0 0.75rem; }
+          .brand-card { width: 140px; min-width: 140px; height: 64px; padding: 0 1rem; }
+          .brand-initials { width: 34px; height: 34px; font-size: 0.75rem; }
+          .brand-name-fallback { font-size: 0.75rem; }
         }
       `}</style>
     </>

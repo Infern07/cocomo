@@ -63,6 +63,10 @@ export default function Footer() {
           .site-footer { padding: 1.5rem 1.5rem; }
           .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
         }
+        @media (max-width: 480px) {
+          .site-footer { padding: 1.25rem 1rem; }
+          .footer-links { flex-direction: column; gap: 0.75rem; }
+        }
       `}</style>
     </footer>
   )

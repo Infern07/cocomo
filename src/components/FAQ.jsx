@@ -3,24 +3,24 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const faqs = [
   {
-    q: "I don't really understand how a marketing agency works — or why it's better.",
-    a: 'We simplify everything. You get a cross-functional team — from SEO to PPC to design — focused on results, not billable hours. Every detail meticulously crafted to perfection.',
+    q: "I don't really understand how a marketing agency works - or why it's better.",
+    a: 'We simplify everything. You get a cross-functional team - from SEO to PPC to design - focused on results, not billable hours. Every detail meticulously crafted to perfection.',
   },
   {
     q: 'Why would I switch instead of using freelancers or agencies?',
-    a: 'Because scattered teams mean scattered results. With us, everything is integrated — one team, one strategy, one goal: consistent, measurable growth.',
+    a: 'Because scattered teams mean scattered results. With us, everything is integrated - one team, one strategy, one goal: consistent, measurable growth.',
   },
   {
     q: "I've tried digital marketing before. It was slow, expensive, and didn't deliver.",
-    a: 'We eliminate the chaos. One powerhouse gives you a dedicated team that handles everything — strategy, execution, reporting — under one roof.',
+    a: 'We eliminate the chaos. One powerhouse gives you a dedicated team that handles everything - strategy, execution, reporting - under one roof.',
   },
   {
-    q: 'I never know what I\'m paying for — or what\'s being done.',
-    a: 'Every hour is tracked. Every task is visible. With crystal-clear billing and structured workflows, you always know where your budget is going — and why.',
+    q: 'I never know what I\'m paying for - or what\'s being done.',
+    a: 'Every hour is tracked. Every task is visible. With crystal-clear billing and structured workflows, you always know where your budget is going - and why.',
   },
   {
     q: 'Our SEO, ads, and content all feel disconnected.',
-    a: 'We build unified strategies. Every channel — SEO, PPC, content, design — works together to drive business growth, not just channel-specific metrics.',
+    a: 'We build unified strategies. Every channel - SEO, PPC, content, design - works together to drive business growth, not just channel-specific metrics.',
   },
 ]
 
@@ -154,6 +154,10 @@ export default function FAQ() {
           font-size: 1rem;
           line-height: 1.75;
           color: var(--text-secondary);
+        }
+        @media (max-width: 480px) {
+          .faq-question { padding: 1rem 1.25rem; font-size: 0.95rem; }
+          .faq-answer p { padding: 0 1.25rem 1rem; font-size: 0.95rem; }
         }
       `}</style>
     </section>
