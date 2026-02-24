@@ -174,6 +174,8 @@ export default function Features() {
             align-items: center;
             gap: 1.5rem;
             width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
           }
         }
 
@@ -286,7 +288,7 @@ export default function Features() {
           grid-template-columns: repeat(2, 1fr);
           gap: 0.75rem;
           width: 100%;
-          max-width: 400px;
+          max-width: min(400px, 100%);
         }
         @media (max-width: 400px) {
           .services-mobile-grid { grid-template-columns: 1fr; }

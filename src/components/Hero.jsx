@@ -58,6 +58,9 @@ export default function Hero() {
           min-height: 100svh;
           flex-direction: column;
           padding: 7rem 2.5rem 4rem;
+          width: 100%;
+          align-items: center;
+          justify-content: center;
         }
         @media (max-width: 768px) { .hero { padding: 6rem 1.5rem 3rem; } }
 
@@ -68,8 +71,10 @@ export default function Hero() {
           justify-content: center;
           align-items: center;
           text-align: center;
+          width: 100%;
           max-width: 900px;
           margin: 0 auto;
+          padding: 0;
         }
 
         .hero-title {
@@ -153,7 +158,7 @@ export default function Hero() {
           background: linear-gradient(to bottom, var(--accent), transparent);
         }
 
-        .companies { width: 100%; max-width: 100%; margin-top: 2rem; }
+        .companies { width: 100%; max-width: 100%; margin-top: 2rem; overflow-x: hidden; }
         @media (max-width: 768px) {
           .hero-title { font-size: 2rem; }
           .hero-tagline { font-size: 1rem; }

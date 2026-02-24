@@ -137,11 +137,15 @@ export default function App() {
           min-height: 100vh;
           display: flex;
           flex-direction: column;
+          overflow-x: hidden;
+          max-width: 100%;
         }
         .snap-main {
           position: relative;
           z-index: 10;
           flex: 1;
+          min-width: 0;
+          overflow-x: hidden;
         }
       `}</style>
     </>

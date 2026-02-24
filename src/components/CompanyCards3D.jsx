@@ -60,8 +60,9 @@ export default function CompanyCards3D() {
     </motion.div>
       <style>{`
         .brand-section {
-          width: 100vw;
-          margin-left: calc(-50vw + 50%);
+          width: 100%;
+          max-width: 100vw;
+          margin-left: 0;
           margin-top: 3rem;
           padding: 0 2rem;
           box-sizing: border-box;
