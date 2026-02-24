@@ -1,4 +1,5 @@
 import CustomCursor from './components/CustomCursor'
+import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Stats from './components/Stats'
 import Features from './components/Features'
@@ -22,6 +23,8 @@ export default function App() {
           <span className="particle" />
           <span className="particle" />
         </div>
+
+      <Navbar />
 
       <div className="app-wrap">
         <main className="snap-main" style={{ position: 'relative', zIndex: 10 }}>

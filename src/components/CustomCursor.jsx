@@ -8,8 +8,8 @@ export default function CustomCursor() {
 
   useEffect(() => {
     const move = (e) => setMouse({ x: e.clientX, y: e.clientY })
-    const sel = 'a, button, [role="button"], .btn-view, .btn-start, .btn-nav-cta, .cta-btn, .brand-card, .floating-cta'
-    const redSel = '.cta-btn, .btn-primary, .btn-nav-cta, .floating-cta'
+    const sel = 'a, button, [role="button"], .btn-view, .btn-start, .btn-nav-cta, .navbar-cta, .navbar-cta-mobile, .cta-btn, .brand-card, .floating-cta'
+    const redSel = '.cta-btn, .btn-primary, .btn-nav-cta, .navbar-cta, .navbar-cta-mobile, .floating-cta'
     const onOver = (e) => {
       if (e.target.closest(sel)) setHovering(true)
       if (e.target.closest(redSel)) setOnRedBg(true)

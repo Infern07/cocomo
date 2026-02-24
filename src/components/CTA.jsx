@@ -48,7 +48,7 @@ export default function CTA() {
           transition={{ duration: 0.6 }}
         >
           <h2>Ready to take your marketing to the next level?</h2>
-          <p>Get in touch — tell us about your project and we&apos;ll get back within 24 hours.</p>
+          <p>Get in touch - tell us about your project and we&apos;ll get back within 24 hours.</p>
 
           {submitted ? (
             <motion.div
@@ -90,7 +90,7 @@ export default function CTA() {
         }
 
         .cta-content {
-          padding: 3rem 2.5rem;
+          padding: 2.5rem 2rem;
           background: rgba(29, 185, 84, 0.06) !important;
           border: 1px solid rgba(29, 185, 84, 0.3) !important;
           border-radius: 20px;
@@ -203,6 +203,10 @@ export default function CTA() {
 
         @media (max-width: 768px) {
           .cta-content { padding: 2rem 1.5rem; }
+        }
+        @media (max-width: 480px) {
+          .cta-content { padding: 1.5rem 1.25rem; }
+          .cta-form input, .cta-form textarea { padding: 0.9rem 1rem; font-size: 16px; }
         }
       `}</style>
     </section>

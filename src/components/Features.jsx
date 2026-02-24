@@ -66,7 +66,7 @@ export default function Features() {
             <p className="graph-center-desc">Strategy, execution & growth - unified</p>
           </motion.div>
 
-          {/* Draggable service nodes */}
+          {/* Draggable service nodes - desktop: radial; mobile: grid */}
           {services.map((s, i) => (
             <motion.div
               key={s.title}
@@ -90,6 +90,40 @@ export default function Features() {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Mobile: stacked layout - center + 2-col grid of services */}
+        <motion.div
+          className="services-mobile-stack"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.4 }}
+        >
+          <motion.div
+            className="graph-center graph-center-mobile"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ delay: 0.2, duration: 0.4 }}
+          >
+            <div className="graph-center-bg" />
+            <span className="graph-center-label">20+ CREATIVE MINDS</span>
+            <h3 className="graph-center-title">Your Marketing Powerhouse</h3>
+            <p className="graph-center-desc">Strategy, execution & growth - unified</p>
+          </motion.div>
+          <div className="services-mobile-grid">
+            {services.map((s, i) => (
+              <motion.div
+                key={s.title}
+                className="graph-node-mobile"
+                initial={{ opacity: 0, y: 12 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.25 + i * 0.05, duration: 0.4 }}
+              >
+                <span className="graph-node-tag">{s.short}</span>
+                <h4>{s.title}</h4>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
 
       <style>{`
@@ -100,12 +134,22 @@ export default function Features() {
           flex-direction: column;
           justify-content: center;
         }
+        @media (max-width: 767px) {
+          .features-compact {
+            min-height: auto;
+            padding: 2rem 1.25rem 2.5rem;
+            justify-content: flex-start;
+          }
+        }
         .features-title {
           text-transform: none;
           font-size: clamp(1.5rem, 3.5vw, 2.25rem);
           line-height: 1.3;
           margin-bottom: 1.5rem;
           text-align: center;
+        }
+        @media (max-width: 767px) {
+          .features-title { margin-bottom: 1.25rem; font-size: 1.4rem; }
         }
 
         .services-graph-wrap {
@@ -117,9 +161,19 @@ export default function Features() {
           perspective: 800px;
         }
         @media (max-width: 767px) {
-          .services-graph-wrap {
-            height: 420px;
-            max-width: 100%;
+          .services-graph-wrap { display: none; }
+        }
+
+        .services-mobile-stack {
+          display: none;
+        }
+        @media (max-width: 767px) {
+          .services-mobile-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            width: 100%;
           }
         }
 
@@ -138,11 +192,8 @@ export default function Features() {
           overflow: hidden;
           box-shadow: 0 0 40px rgba(29, 185, 84, 0.15);
         }
-        @media (max-width: 767px) {
-          .graph-center {
-            width: 160px;
-            padding: 1.25rem 1rem;
-          }
+        @media (min-width: 768px) {
+          .graph-center-mobile { display: none; }
         }
         .graph-center-bg {
           position: absolute;
@@ -220,19 +271,47 @@ export default function Features() {
           line-height: 1.25;
         }
 
-        @media (max-width: 767px) {
-          .graph-node:nth-child(2) { top: 10%; left: 16.67%; }
-          .graph-node:nth-child(3) { top: 10%; left: 50%; }
-          .graph-node:nth-child(4) { top: 10%; left: 83.33%; }
-          .graph-node:nth-child(5) { top: 90%; left: 16.67%; }
-          .graph-node:nth-child(6) { top: 90%; left: 50%; }
-          .graph-node:nth-child(7) { top: 90%; left: 83.33%; }
-          .graph-node {
-            min-width: 85px;
-            max-width: 105px;
-            padding: 0.65rem 0.8rem;
-          }
-          .graph-node h4 { font-size: 0.65rem; }
+        .graph-center-mobile {
+          position: relative;
+          width: 100%;
+          max-width: 320px;
+          padding: 1.5rem 1.25rem;
+          transform: none;
+          top: auto;
+          left: auto;
+        }
+        .graph-center-mobile .graph-center-ring { display: none; }
+        .services-mobile-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.75rem;
+          width: 100%;
+          max-width: 400px;
+        }
+        @media (max-width: 400px) {
+          .services-mobile-grid { grid-template-columns: 1fr; }
+        }
+        .graph-node-mobile {
+          padding: 1rem 1rem;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid var(--border-subtle);
+          border-radius: 10px;
+          border-left: 3px solid var(--accent);
+        }
+        .graph-node-mobile .graph-node-tag {
+          font-size: 0.55rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          color: var(--accent);
+          display: block;
+          margin-bottom: 0.25rem;
+        }
+        .graph-node-mobile h4 {
+          font-family: var(--font-heading);
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: white;
+          line-height: 1.3;
         }
 
         @keyframes center-glow {

@@ -3,15 +3,15 @@ import { useRef } from 'react'
 
 const companies = [
   { name: 'Belgium Waffle' },
-  { name: 'Petpooja' },
-  { name: 'Samsung', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg' },
+  { name: 'Petpooja', logo: 'https://cdn.brandfetch.io/idPpjFWWl8/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1764569990528' },
+  { name: 'Samsung', logo: 'https://cdn.brandfetch.io/iduaw_nOnR/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1680282244723' },
   { name: 'Meta', logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg' },
   { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg' },
   { name: 'Adobe', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/8d/Adobe_Corporate_Logo.png' },
   { name: 'Google', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg' },
   { name: 'Trends', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/India_Today_logo.png' },
-  { name: 'Mamaearth' },
-  { name: 'Intas' },
+  { name: 'Mamaearth', logo: 'https://cdn.brandfetch.io/idfoTiWukP/w/5166/h/710/theme/dark/logo.png?c=1bxid64Mup7aczewSAYMX&t=1667566282419' },
+  { name: 'Intas', logo: 'https://cdn.brandfetch.io/id66ndfbku/w/120/h/51/theme/dark/logo.png?c=1bxid64Mup7aczewSAYMX&t=1764823312584' },
   { name: 'Amity University', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/91/Amity_University_Mumbai.png' },
 ]
 
@@ -47,7 +47,7 @@ export default function CompanyCards3D() {
             >
               {c.logo ? (
                 <>
-                  <img src={c.logo} alt={c.name} className="brand-logo" referrerPolicy="no-referrer" onError={(e) => { e.target.style.display = 'none'; e.target.nextElementSibling?.classList.add('show') }} />
+                  <img src={c.logo} alt={c.name} className="brand-logo" onError={(e) => { e.target.style.display = 'none'; e.target.nextElementSibling?.classList.add('show') }} />
                   <span className="brand-name brand-name-fallback">{c.name}</span>
                 </>
               ) : (
