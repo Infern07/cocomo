@@ -62,7 +62,7 @@ export default function Features() {
             <div className="graph-center-bg" />
             <div className="graph-center-ring" />
             <span className="graph-center-label">20+ CREATIVE MINDS</span>
-            <h3 className="graph-center-title">Your Marketing Powerhouse</h3>
+            <h3 className="graph-center-title">Influencer Marketing</h3>
             <p className="graph-center-desc">Strategy, execution & growth - unified</p>
           </motion.div>
 
@@ -104,9 +104,9 @@ export default function Features() {
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.2, duration: 0.4 }}
           >
-            <div className="graph-center-bg" />
+            <div className="graph-center-bg" /> 
             <span className="graph-center-label">20+ CREATIVE MINDS</span>
-            <h3 className="graph-center-title">Your Marketing Powerhouse</h3>
+            <h3 className="graph-center-title">Influencer Marketing</h3>
             <p className="graph-center-desc">Strategy, execution & growth - unified</p>
           </motion.div>
           <div className="services-mobile-grid">
